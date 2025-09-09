@@ -12,8 +12,7 @@ services:
     container_name: goride_api
     command: bash start.sh
     ports:
-      - "1026:1026"
-      - "1025:1025"
+      - "1033:1033"
     volumes:
       - .:/usr/src/app
       - ./static:/usr/src/app/static
@@ -61,7 +60,7 @@ services:
     container_name: goride_flower
     command: sh -c "sleep 5 && celery --broker=redis://redis:6379/0 flower"
     ports:
-      - "5555:5555"
+      - "5557:5555"
     depends_on:
       - api
       - redis
@@ -70,7 +69,7 @@ services:
     image: nginx:stable-alpine
     container_name: goride_nginx
     ports:
-      - "1027:80"
+      - "1032:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./static:/static

@@ -2,6 +2,7 @@ import random
 import string
 from django.utils.timezone import datetime
 from django.utils.translation import gettext_lazy as _
+from django.utils import translation
 
 from rest_framework import permissions, status, generics
 from rest_framework.exceptions import ValidationError, NotFound
@@ -236,7 +237,14 @@ class PasswordGeneratorView(APIView):
 
 @api_view(['GET'])
 def test_login(request):
-    ic(request.user.profile.app_language.code)
+    # Get user's language preference
+    user_language = request.user.profile.app_language.code
+    ic(user_language)
+    
+    # Activate the user's language directly
+    translation.activate(user_language)
+    
+    # Now gettext will use the activated language
     ic(_("Hello, world!"))
     return Response({"message": _("Hello, world!")})
 

@@ -11,9 +11,9 @@ cru:
 test:
 	python3 manage.py test
 run-asgi:
-	uvicorn core.asgi:application --host 0.0.0.0 --port 1026 --reload
+	uvicorn core.asgi:application --host 0.0.0.0 --port 1033 --reload
 run:
-	python manage.py runserver 0.0.0.0:1026
+	python manage.py runserver 0.0.0.0:1033
 
 #others
 git-rm-idea:
@@ -42,9 +42,9 @@ no-venv:
 re-mig:
 	make no-sqlite-db && make clear-linux && make re-django & make i && make mig && make cru && make collect && make test && make run-asgi
 run-wsgi:
-	gunicorn core.wsgi:application --bind 0.0.0.0:1026
+	gunicorn core.wsgi:application --bind 0.0.0.0:1033
 tunnel:
-	jprq http 1026 -s goride-api
+	jprq http 1033 -s goride-api
 open-bash:
 	sudo docker exec -it goride_api bash
 down:
